@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Youtube</title>
+  </head>
+
+  <body>
+    <form action="{{url_for("homepage")}}" method="post">
+      <label for="url">URL:</label><br>
+      <input type="text" id="url" name="url"/>
+      <button type="submit">Submit</button>
+    </form>
+    {% if youtube_id %}
+      {% if playlist %}
+      <h2>
+          YouTube playlist link:
+          <a href="https://www.youtube.com/playlist?list={{youtube_id}}">{{youtube_id}}</a>
+      </h2>
+      <iframe src="https://www.youtube.com/embed/videoseries?list={{youtube_id}}" width="853" height="480" frameborder="0" allowfullscreen></iframe>
+      {% else %}
+      <h2>
+          YouTube video link:
+          <a href="https://www.youtube.com/watch?v={{youtube_id}}">{{youtube_id}}</a>
+      </h2>
+      <iframe src="https://www.youtube.com/embed/{{youtube_id}}" width="853" height="480" frameborder="0" allowfullscreen></iframe>
+      {% endif %}
+    {% else %}
+    <h2>
+        Url entered is not a YouTube video.
+        Enter a valid url.
+    </h2>
+    {% endif %}
+  </body>
+
+</html>
