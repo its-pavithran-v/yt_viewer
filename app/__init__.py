@@ -18,15 +18,17 @@ def homepage():
         if yt_url.hostname in {'www.youtube.com', 'youtube.com'}:
             if yt_url.path == '/watch':
                 video_id = parse_qs(yt_url.query)['v'][0]
-            if yt_url.path[:7] == '/watch/':
+            elif yt_url.path[:7] == '/watch/':
                 video_id = yt_url.path.split('/')[1]
-            if yt_url.path[:7] == '/embed/':
+            elif yt_url.path[:7] == '/embed/':
                 video_id = yt_url.path.split('/')[2]
-            if yt_url.path[:3] == '/v/':
+            elif yt_url.path[:3] == '/v/':
                 video_id = yt_url.path.split('/')[2]
-            if yt_url.path[:9] == '/playlist':
+            elif yt_url.path[:9] == '/playlist':
                 video_id = parse_qs(yt_url.query)['list'][0]
                 return render_template('index.html', youtube_id = video_id , playlist = True)
+            else:
+                video_id = yt_url.path.split('/')[1]
             return render_template('index.html', youtube_id = video_id)
         else:
             return render_template('index.html')
