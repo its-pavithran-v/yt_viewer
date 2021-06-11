@@ -21,6 +21,9 @@
       <input type="text" id="url" name="url" size="100"/>
       <button type="submit">Submit</button>
     </form>
+    {% if error %}
+        <h2>{{error}}</h2>
+    {% endif %}
     {% if youtube_id %}
       <h2>
           YouTube video link:
@@ -32,8 +35,11 @@
       <h2>
           YouTube playlist link:
           <a href="https://www.youtube.com/playlist?list={{playlist_id}}">{{playlist_id}}</a>
+          <h2>Playlist Title: {{p_title}}</h2>
       </h2>
-      <iframe src="https://www.youtube.com/embed/videoseries?list={{playlist_id}}" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+      {% for video in v_ids %}
+      <iframe src="https://www.youtube.com/embed/{{video}}" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+      {% endfor %}
     {% endif %}
   </body>
 
